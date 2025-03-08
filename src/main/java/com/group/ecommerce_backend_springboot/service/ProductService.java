@@ -1,5 +1,6 @@
 package com.group.ecommerce_backend_springboot.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
@@ -20,6 +21,10 @@ public class ProductService {
 
     public Optional<Product> getProductById(ObjectId id) {
         return productRepository.findById(id);
+    }
+
+    public List<Product> getAllProducts(ObjectId id) {
+        return productRepository.findAll();
     }
 
     public void deleteProductById(ObjectId id) {
