@@ -2,7 +2,6 @@ package com.group.ecommerce_backend_springboot.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,13 +15,11 @@ public class Product {
     @Id
     private ObjectId id;
     @DBRef
-    private List<OrderItem> orderItems;
-    @DBRef
     private Category category;
 
     private String name;
     private String description;
-    private BigDecimal price;
+    private BigDecimal currPrice;
     private long stockQuantity;
     private String imageUrl;
     @CreatedDate
@@ -30,14 +27,13 @@ public class Product {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public Product(ObjectId id, List<OrderItem> orderItems, Category category, String name, String description, BigDecimal price, long stockQuantity, String imageUrl, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Product(ObjectId id, Category category, String name, String description, BigDecimal currPrice, long stockQuantity, String imageUrl, LocalDateTime createdAt, LocalDateTime updatedAt) {
         super();
         this.id = id;
-        this.orderItems = orderItems;
         this.category = category;
         this.name = name;
         this.description = description;
-        this.price = price;
+        this.currPrice = currPrice;
         this.stockQuantity = stockQuantity;
         this.imageUrl = imageUrl;
         this.createdAt = createdAt;
@@ -63,10 +59,10 @@ public class Product {
         this.description = description;
     }
     public BigDecimal getPrice() {
-        return price;
+        return currPrice;
     }
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setPrice(BigDecimal currPrice) {
+        this.currPrice = currPrice;
     }
     public long getStockQuantity() {
         return stockQuantity;
@@ -91,12 +87,6 @@ public class Product {
     }
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
     }
     public Category getCategory() {
         return category;

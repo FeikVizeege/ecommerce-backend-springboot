@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,6 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Payment {
     enum PaymentStatus {
         COMPLETED,
+        PENDING,
         REFUNDED,
     }
 
@@ -26,8 +28,10 @@ public class Payment {
     private PaymentStatus status;
     @CreatedDate
     private LocalDateTime paymentDate;
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 
-    public Payment(ObjectId id, Order order, String method, BigDecimal amount, PaymentStatus status, LocalDateTime paymentDate) {
+    public Payment(ObjectId id, Order order, String method, BigDecimal amount, PaymentStatus status, LocalDateTime paymentDate, LocalDateTime updatedAt) {
         super();
         this.id = id;
         this.order = order;
@@ -35,6 +39,7 @@ public class Payment {
         this.amount = amount;
         this.status = status;
         this.paymentDate = paymentDate;
+        this.updatedAt = updatedAt;
     }
 
     public BigDecimal getAmount() {
@@ -66,6 +71,12 @@ public class Payment {
     }
     public void setStatus(PaymentStatus status) {
         this.status = status;
+    }
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
     public Order getOrder() {
         return order;

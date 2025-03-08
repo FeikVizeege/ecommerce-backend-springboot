@@ -2,21 +2,17 @@ package com.group.ecommerce_backend_springboot.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "users")
 public class User {
     @Id
     private ObjectId id;
-    @DBRef
-    private List<Order> orders;
 
     private String firstName;
     private String lastName;
@@ -32,10 +28,9 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public User(ObjectId id, List<Order> orders, String firstName, String lastName, String username, String email, String password, String phone, String address, LocalDate birthday, String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public User(ObjectId id, String firstName, String lastName, String username, String email, String password, String phone, String address, LocalDate birthday, String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
         super();
         this.id = id;
-        this.orders = orders;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -119,11 +114,5 @@ public class User {
     }
     public void setAddress(String address) {
         this.address = address;
-    }
-    public List<Order> getOrders() {
-        return orders;
-    }
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
     }
 }

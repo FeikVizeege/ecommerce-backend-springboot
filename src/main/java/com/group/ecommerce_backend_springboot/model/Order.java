@@ -2,7 +2,6 @@ package com.group.ecommerce_backend_springboot.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
@@ -22,7 +21,7 @@ public class Order {
     @Id
     private ObjectId id;
     @DBRef
-    private List<OrderItem> orderItems;
+    private User user;
 
     private BigDecimal totalAmount;
     private String shippingAddress;
@@ -33,10 +32,10 @@ public class Order {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public Order(ObjectId id, List<OrderItem> orderItems, BigDecimal totalAmount, String shippingAddress, String billingAddress, OrderStatus status, LocalDateTime orderedDate, LocalDateTime updatedAt) {
+    public Order(ObjectId id, User user, BigDecimal totalAmount, String shippingAddress, String billingAddress, OrderStatus status, LocalDateTime orderedDate, LocalDateTime updatedAt) {
         super();
         this.id = id;
-        this.orderItems = orderItems;
+        this.user = user;
         this.totalAmount = totalAmount;
         this.shippingAddress = shippingAddress;
         this.billingAddress = billingAddress;
@@ -81,16 +80,16 @@ public class Order {
     public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
 }
